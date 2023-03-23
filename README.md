@@ -3,7 +3,7 @@ Create memorizable passwords easily using this CLI
 
 ## Installation
 ### Windows
-Download the executable from the latest release and put it somewhere in your path or in your working directory
+Download the executable from the [latest release](https://github.com/Antosser/memorizable-password-generator/releases/latest) and put it somewhere in your path or in your working directory
 
 ### Linux / Compiling yourself
 1. Download Rust
