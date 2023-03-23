@@ -20,7 +20,7 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-    let nounlist: Vec<&str> = std::include_str!("nounlist.txt").split("\n").collect();
+    let nounlist: Vec<&str> = std::include_str!("nounlist.txt").split('\n').collect();
 
     let mut password = "".to_owned();
     let mut rng = rand::thread_rng();
