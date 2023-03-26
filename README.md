@@ -18,9 +18,10 @@ Create memorizable passwords easily using this CLI
 Usage: mpg [OPTIONS]
 
 Options:
-  -s, --symbol                       Whether to add a random symbol at the end
-  -w, --words <WORDS>                The amount of words [default: 2]
-  -n, --numberspairs <NUMBERSPAIRS>  The amount of number pairs [default: 1]
-  -h, --help                         Print help
-  -V, --version                      Print version
+  -s, --start <START>      The type of letter at the beginning of the password [default: consonant] [possible values: vowel, consonant]
+  -l, --letters <LETTERS>  Amount of letters [default: 7]
+  -n, --numbers <NUMBERS>  How many pairs of numbers to add at the end [default: 1]
+  -S, --symbols <SYMBOLS>  How many symbols to add at the end [default: 0]
+  -h, --help               Print help
+  -V, --version            Print version
 ```
