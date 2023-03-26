@@ -25,3 +25,21 @@ Options:
   -h, --help               Print help
   -V, --version            Print version
 ```
+
+## Examples
+```
+~ mpg
+konamit67
+
+~ mpg -s vowel
+uxojaca45
+
+~ mpg -s vowel -l 4
+ubal12
+
+~ mpg -s vowel -l 4 -n 2
+emib7812
+
+~ mpg -s vowel -l 4 -n 2 -S 3
+ecun2345=%&
+```
