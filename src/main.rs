@@ -27,13 +27,13 @@ struct Args {
     #[arg(short, long, default_value = "vowel")]
     end: LetterType,
 
-    /// Whether to add a number at the end
-    #[arg(short, long, default_value_t = true)]
-    number: bool,
+    /// How many pairs of numbers to add at the end
+    #[arg(short, long, default_value_t = 1)]
+    numbers: u32,
 
-    /// Whether to add a symbol at the end after the number
-    #[arg(short, long, default_value_t = false)]
-    symbol: bool,
+    /// How many symbols to add at the end
+    #[arg(short = 'S', long, default_value_t = 0)]
+    symbols: u32,
 }
 
 fn main() {
@@ -66,13 +66,13 @@ fn main() {
             });
         }
 
-        if args.number {
+        for _ in 0..args.numbers {
             let number = rng.gen_range(0..9);
             password.push_str(number.to_string().as_str());
             password.push_str((number + 1).to_string().as_str());
         }
 
-        if args.symbol {
+        for _ in 0..args.symbols {
             password.push(symbols[rng.gen_range(0..symbols.len())]);
         }
     }
