@@ -1,50 +1,67 @@
-use clap::Parser;
+use clap::{Parser, ValueEnum};
 use rand::Rng;
+
+#[derive(ValueEnum, Clone, Debug, strum_macros::Display, PartialEq)]
+enum LetterType {
+    Vowel,
+    Consonant,
+}
+impl LetterType {
+    pub fn other(self) -> Self {
+        match self {
+            Self::Vowel => Self::Consonant,
+            Self::Consonant => Self::Vowel,
+        }
+    }
+}
 
 /// Create memorizable passwords easily using this CLI
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-    /// Whether to add a random symbol at the end
-    #[arg(short, long, default_value_t = false)]
-    symbol: bool,
+    /// The type of letter at the beginning of the password
+    #[arg(short, long, default_value = "consonant")]
+    start: LetterType,
 
-    /// The amount of words
-    #[arg(short, long, default_value_t = 2)]
-    words: u32,
+    /// The type of letter at the end of the password
+    #[arg(short, long, default_value = "vowel")]
+    end: LetterType,
 
-    /// The amount of number pairs
-    #[arg(short, long, default_value_t = 1)]
-    numberspairs: u32,
+    /// Whether to add a number at the end
+    #[arg(short, long, default_value_t = true)]
+    number: bool,
 }
 
 fn main() {
     let args = Args::parse();
-    let nounlist: Vec<&str> = std::include_str!("nounlist.txt").split('\n').collect();
+    let vowels = ['a', 'e', 'i', 'o', 'u'];
+    let consonants = [
+        'b', 'c', 'd', 'f', 'g', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 's', 't', 'v', 'x', 'z',
+    ];
 
-    let mut password = "".to_owned();
-    let mut rng = rand::thread_rng();
+    let mut password = String::new();
+    {
+        let mut letter_type = args.start;
+        let mut rng = rand::thread_rng();
 
-    for _ in 0..args.words {
-        password.push_str(nounlist[rng.gen_range(0..nounlist.len())]);
-    }
+        for _ in 0..7 {
+            password.push(match letter_type {
+                LetterType::Consonant => consonants[rng.gen_range(0..consonants.len())],
+                LetterType::Vowel => vowels[rng.gen_range(0..vowels.len())],
+            });
 
-    for _ in 0..args.numberspairs {
-        let num = rng.gen_range(0..=8);
+            letter_type = letter_type.other();
+        }
+        if letter_type == args.end {
+            password.push(match letter_type {
+                LetterType::Consonant => consonants[rng.gen_range(0..consonants.len())],
+                LetterType::Vowel => vowels[rng.gen_range(0..vowels.len())],
+            });
+        }
 
-        password.push_str(num.to_string().as_str());
-        password.push_str((num + 1).to_string().as_str());
-    }
-
-    if args.symbol {
-        let symbols = "!@#$%^&*-+=".to_owned();
-
-        password.push(
-            symbols
-                .chars()
-                .nth(rng.gen_range(0..symbols.len()))
-                .unwrap(),
-        );
+        let number = rng.gen_range(0..9);
+        password.push_str(number.to_string().as_str());
+        password.push_str((number + 1).to_string().as_str());
     }
 
     println!("{}", password);
