@@ -30,6 +30,10 @@ struct Args {
     /// Whether to add a number at the end
     #[arg(short, long, default_value_t = true)]
     number: bool,
+
+    /// Whether to add a symbol at the end after the number
+    #[arg(short, long, default_value_t = false)]
+    symbol: bool,
 }
 
 fn main() {
@@ -38,6 +42,7 @@ fn main() {
     let consonants = [
         'b', 'c', 'd', 'f', 'g', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 's', 't', 'v', 'x', 'z',
     ];
+    let symbols = ['!', '@', '#', '%', '^', '&', '/', '=', '+'];
 
     let mut password = String::new();
     {
@@ -53,9 +58,11 @@ fn main() {
             letter_type = letter_type.other();
         }
         if letter_type == args.end {
-            password.push(match letter_type {
-                LetterType::Consonant => consonants[rng.gen_range(0..consonants.len())],
-                LetterType::Vowel => vowels[rng.gen_range(0..vowels.len())],
+            password.push({
+                match letter_type {
+                    LetterType::Consonant => consonants[rng.gen_range(0..consonants.len())],
+                    LetterType::Vowel => vowels[rng.gen_range(0..vowels.len())],
+                }
             });
         }
 
@@ -63,6 +70,10 @@ fn main() {
             let number = rng.gen_range(0..9);
             password.push_str(number.to_string().as_str());
             password.push_str((number + 1).to_string().as_str());
+        }
+
+        if args.symbol {
+            password.push(symbols[rng.gen_range(0..symbols.len())]);
         }
     }
 
