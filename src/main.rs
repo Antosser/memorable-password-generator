@@ -59,9 +59,11 @@ fn main() {
             });
         }
 
-        let number = rng.gen_range(0..9);
-        password.push_str(number.to_string().as_str());
-        password.push_str((number + 1).to_string().as_str());
+        if args.number {
+            let number = rng.gen_range(0..9);
+            password.push_str(number.to_string().as_str());
+            password.push_str((number + 1).to_string().as_str());
+        }
     }
 
     println!("{}", password);
