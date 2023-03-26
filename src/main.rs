@@ -23,9 +23,9 @@ struct Args {
     #[arg(short, long, default_value = "consonant")]
     start: LetterType,
 
-    /// The type of letter at the end of the password
-    #[arg(short, long, default_value = "vowel")]
-    end: LetterType,
+    /// Amount of letters
+    #[arg(short, long, default_value_t = 7)]
+    letters: u32,
 
     /// How many pairs of numbers to add at the end
     #[arg(short, long, default_value_t = 1)]
@@ -49,21 +49,13 @@ fn main() {
         let mut letter_type = args.start;
         let mut rng = rand::thread_rng();
 
-        for _ in 0..7 {
+        for _ in 0..args.letters {
             password.push(match letter_type {
                 LetterType::Consonant => consonants[rng.gen_range(0..consonants.len())],
                 LetterType::Vowel => vowels[rng.gen_range(0..vowels.len())],
             });
 
             letter_type = letter_type.other();
-        }
-        if letter_type == args.end {
-            password.push({
-                match letter_type {
-                    LetterType::Consonant => consonants[rng.gen_range(0..consonants.len())],
-                    LetterType::Vowel => vowels[rng.gen_range(0..vowels.len())],
-                }
-            });
         }
 
         for _ in 0..args.numbers {
