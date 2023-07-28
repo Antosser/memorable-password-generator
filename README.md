@@ -15,7 +15,7 @@ Download the executable from the [latest release](https://github.com/Antosser/me
 ```
 Create memorable passwords easily using this CLI
 
-Usage: mpg [OPTIONS]
+Usage: mpgen [OPTIONS]
 
 Options:
   -s, --start <START>      The type of letter at the beginning of the password [default: consonant] [possible values: vowel, consonant]
