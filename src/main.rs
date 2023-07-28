@@ -15,7 +15,7 @@ impl LetterType {
     }
 }
 
-/// Create memorizable passwords easily using this CLI
+/// Create memorable passwords easily using this CLI
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
