@@ -2,14 +2,13 @@
 Create memorizable passwords easily using this CLI
 
 ## Installation
-### Windows
-Download the executable from the [latest release](https://github.com/Antosser/memorizable-password-generator/releases/latest) and put it somewhere in your path or in your working directory
+### Compiling and installing from source
+1. Get [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html)
+2. Run `cargo install mpgen`
+3. Run `mpgen`
 
-### Linux / Compiling yourself
-1. Download Rust
-2. Run `cargo build -r`
-3. Binary is in `./target/release/`
-4. Put it in your path or working directory
+### Windows (pre-compiled)
+Download the executable from the [latest release](https://github.com/Antosser/memorizable-password-generator/releases/latest) and put it somewhere in your path or in your working directory
 
 ## Usage
 ```
