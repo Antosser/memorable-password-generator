@@ -13,7 +13,7 @@ Download the executable from the [latest release](https://github.com/Antosser/me
 
 ## Usage
 ```
-Create memorizable passwords easily using this CLI
+Create memorable passwords easily using this CLI
 
 Usage: mpg [OPTIONS]
 
